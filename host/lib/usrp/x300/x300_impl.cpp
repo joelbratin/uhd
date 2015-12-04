@@ -1433,7 +1433,8 @@ void x300_impl::update_clock_source(mboard_members_t &mb, const std::string &sou
 
     //The programming code in x300_clock_ctrl is not compatible with revs <= 4 and may
     //lead to locking issues. So, disable the ref-locked check for older (unsupported) boards.
-    if (mb.hw_rev > 4) {
+    // JOBT: Disable ref-locked check for ALL boards
+    if (0  && mb.hw_rev > 4) {
         if (not wait_for_clk_locked(mb, fw_regmap_t::clk_status_reg_t::LMK_LOCK, timeout)) {
             //failed to lock on reference
             if (mb.initialization_done) {
